@@ -46,13 +46,13 @@ spring:
     default-schema: teletext
     contexts: dev
   #    drop-first: true
-#  security:
-#    oauth2:
-#      resourceserver:
-#        jwt:
-#          issuer-uri: https://codecake.kinde.com
-#          jwk-set-uri: https://codecake.kinde.com/.well-known/jwks
-#          audiences: http://localhost:8080/api
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: ${ISSUER_URI}
+          jwk-set-uri: ${JWK_SET_URI}
+          audiences: http://localhost:8080/api
   devtools:
     restart:
       enabled: false
@@ -66,5 +66,19 @@ spring:
 
 server:
   port: 8080
-  servlet:
-    context-path: /api/v1/
+
+application:
+  client-base-url: http://localhost:4200
+  cors:
+    allowed-origins: http://localhost:4200
+    allowed-methods: "*"
+    allowed-headers: "*"
+    exposed-headers: "*"
+    allow-credentials: false
+    max-age: 300
+  kinde:
+    api: ${API_URL}
+    client-id: ${KINDE_CLIENT_ID}
+    client-secret: ${KINDE_CLIENT_SECRET}
+    audience: ${AUDIENCE}
+
